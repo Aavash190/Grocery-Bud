@@ -1,0 +1,47 @@
+.single-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Item text */
+.single-item p {
+  text-transform: capitalize;
+}
+
+/* Checkbox */
+.single-item input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+/* Common button styles */
+.single-item button {
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+/* Edit button */
+.single-item .edit-btn {
+  background-color: #06b6d4;
+}
+
+.single-item .edit-btn:hover {
+  background-color: #0e7490;
+}
+
+/* Delete button */
+.single-item .remove-btn {
+  background-color: #222;
+}
+
+.single-item .remove-btn:hover {
+  background-color: #900e0e;
+}

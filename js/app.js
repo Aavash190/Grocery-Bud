@@ -10,7 +10,7 @@ let items = [
 ];
 
 // Select the main container where items will be displayed
-const app = document.getElementById("app");
+const list = document.querySelector(".grocery-list");
 
 // =========================
 // Render Function
@@ -18,16 +18,11 @@ const app = document.getElementById("app");
 
 // This function displays all items on the screen
 export function render() {
-  // Clear previous items before re-rendering
-  app.innerHTML = "";
+  list.innerHTML = "";
 
-  // Loop through each item in the array
   items.forEach((item) => {
-    // Create a DOM element for each item
     const element = createSingleItem(item);
-
-    // Add the created element into the app container
-    app.appendChild(element);
+    list.appendChild(element);
   });
 }
 

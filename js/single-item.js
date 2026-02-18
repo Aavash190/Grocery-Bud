@@ -3,18 +3,16 @@ import { editCompleted } from "./app.js";
 
 // This function creates one grocery item element
 export default function createSingleItem(item) {
-  // Create a new div element
+  // Create container div
   const div = document.createElement("div");
-
-  // Add class for styling
   div.classList.add("single-item");
 
-  // If item is completed, add completed class
+  // Add completed class if item is completed
   if (item.completed) {
     div.classList.add("completed");
   }
 
-  // Insert HTML structure inside div
+  // Insert structure
   div.innerHTML = `
     <input type="checkbox" ${item.completed ? "checked" : ""} />
     <p>${item.name}</p>
@@ -26,15 +24,12 @@ export default function createSingleItem(item) {
     </button>
   `;
 
-  // Select the checkbox inside this div
+  // Checkbox toggle functionality
   const checkbox = div.querySelector('input[type="checkbox"]');
 
-  // Add event listener to checkbox
   checkbox.addEventListener("change", () => {
-    // When checkbox is changed, call editCompleted function
     editCompleted(item.id);
   });
 
-  // Return the completed div element
   return div;
 }

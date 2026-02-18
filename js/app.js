@@ -1,52 +1,48 @@
-// Import the function that creates a single item element
-import createSingleItem from "./single-item.js";
+import { createForm } from "./form.js";
+import { createItems } from "./items.js";
 
-// Our grocery items array (each item has id, name, completed status)
 let items = [
-  { id: 1, name: "milk", completed: true },
-  { id: 2, name: "bread", completed: true },
-  { id: 3, name: "eggs", completed: false },
-  { id: 4, name: "butter", completed: false },
+  { id: "1", name: "milk", completed: false },
+  { id: "2", name: "bread", completed: true },
 ];
 
-// Select the main container where items will be displayed
-const list = document.querySelector(".grocery-list");
-
 // =========================
-// Render Function
+// Render App
 // =========================
+function render() {
+  const app = document.getElementById("app");
+  app.innerHTML = "";
 
-// This function displays all items on the screen
-export function render() {
-  list.innerHTML = "";
+  const formElement = createForm();
+  const itemsElement = createItems(items);
 
-  items.forEach((item) => {
-    const element = createSingleItem(item);
-    list.appendChild(element);
-  });
+  app.appendChild(formElement);
+  app.appendChild(itemsElement);
 }
 
 // =========================
-// Edit Completed Function
+// Generate Unique ID
 // =========================
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
 
-// This function toggles the completed status of an item
-export function editCompleted(itemId) {
-  // Update the items array using map()
-  items = items.map((item) => {
-    // If current item's id matches clicked item id
-    if (item.id === itemId) {
-      // Return new object with opposite completed value
-      return { ...item, completed: !item.completed };
-    }
+// =========================
+// Add Item
+// =========================
+export function addItem(itemName) {
+  const newItem = {
+    name: itemName,
+    completed: false,
+    id: generateId(),
+  };
 
-    // Otherwise return item unchanged
-    return item;
-  });
+  items = [...items, newItem];
 
-  // After updating data, re-render UI
   render();
+
+  setTimeout(() => alert("Item Added Successfully!"), 0);
 }
 
-// Call render() once when page loads
+// Initial render
 render();

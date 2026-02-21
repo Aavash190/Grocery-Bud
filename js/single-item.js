@@ -1,35 +1,39 @@
-// Import the editCompleted function from app.js
-import { editCompleted } from "./app.js";
+// Import functions from app.js
+import { editCompleted, removeItem, setEditId } from "./app.js";
 
-// This function creates one grocery item element
+// Create Single Item Component
 export default function createSingleItem(item) {
-  // Create container div
   const div = document.createElement("div");
   div.classList.add("single-item");
 
-  // Add completed class if item is completed
+  // If completed, add completed style
   if (item.completed) {
     div.classList.add("completed");
   }
 
-  // Insert structure
+  // Create item structure
   div.innerHTML = `
     <input type="checkbox" ${item.completed ? "checked" : ""} />
     <p>${item.name}</p>
-    <button class="edit-btn">
-      <i class="fa-regular fa-pen-to-square"></i>
-    </button>
-    <button class="remove-btn">
-      <i class="fa-regular fa-trash-can"></i>
-    </button>
+    <div class="btn-container">
+      <button class="edit-btn">edit</button>
+      <button class="delete-btn">delete</button>
+    </div>
   `;
 
-  // Checkbox toggle functionality
-  const checkbox = div.querySelector('input[type="checkbox"]');
+  // Select elements
+  const checkbox = div.querySelector("input");
+  const editBtn = div.querySelector(".edit-btn");
+  const deleteBtn = div.querySelector(".delete-btn");
 
-  checkbox.addEventListener("change", () => {
-    editCompleted(item.id);
-  });
+  // Toggle completed
+  checkbox.addEventListener("change", () => editCompleted(item.id));
+
+  // Edit name
+  editBtn.addEventListener("click", () => setEditId(item.id));
+
+  // Delete item
+  deleteBtn.addEventListener("click", () => removeItem(item.id));
 
   return div;
 }

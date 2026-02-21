@@ -1,14 +1,25 @@
-import { createSingleItem } from "./single-item.js";
+// Import single item component
+import createSingleItem from "./single-item.js";
 
-// Create the container that holds all items
-export function createItems(itemsArray) {
+// Create Items List Component
+export function createItems(items) {
+  // Main container
   const container = document.createElement("div");
-  container.className = "items";
+  container.classList.add("grocery-container");
 
-  itemsArray.forEach((item) => {
-    const singleItem = createSingleItem(item);
-    container.appendChild(singleItem);
+  // List wrapper
+  const list = document.createElement("div");
+  list.classList.add("grocery-list");
+
+  // Create each item and add to list
+  items.forEach((item) => {
+    const element = createSingleItem(item);
+    list.appendChild(element);
   });
+
+  container.appendChild(list);
 
   return container;
 }
+
+
